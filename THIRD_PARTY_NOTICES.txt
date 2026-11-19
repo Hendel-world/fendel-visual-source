@@ -1,0 +1,9 @@
+ImmediatelyFast 1.14.3 for Minecraft 1.21.11
+Source: https://github.com/RaphiMC/ImmediatelyFast
+Project: https://modrinth.com/mod/immediatelyfast
+License: LGPL-3.0-or-later. The unmodified ImmediatelyFast jar is bundled as a separate nested Fabric mod.
+
+Mod Menu 17.0.1 for Minecraft 1.21.11
+Source: https://github.com/TerraformersMC/ModMenu
+Project: https://modrinth.com/mod/modmenu
+License: MIT. The unmodified Mod Menu jar is bundled as a separate nested Fabric mod.

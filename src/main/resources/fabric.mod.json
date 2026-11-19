@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "pulse",
+  "version": "${version}",
+  "name": "Fendel Visual",
+  "icon": "assets/pulse/icon.png",
+  "description": "Fendel Visual client mod.",
+  "authors": [
+    "Fendel Visual"
+  ],
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "ru.pulse.Pulse"
+    ]
+  },
+  "mixins": [
+    "pulse.mixins.json"
+  ],
+  "accessWidener": "pulse.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.17.2",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*",
+    "immediatelyfast": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

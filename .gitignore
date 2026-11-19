@@ -1,0 +1,9 @@
+.gradle/
+build/
+run/
+run-fendel/
+*.class
+*.log
+.env
+.env.*
+local.properties

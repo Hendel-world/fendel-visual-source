@@ -1,0 +1,91 @@
+plugins {
+    id 'fabric-loom' version '1.17.12'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/pulse.accesswidener")
+
+    mods {
+        pulse {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // Rendering optimizations (ZakoOpt's required rendering dependency) and its config screen.
+    modImplementation "maven.modrinth:5ZwdcRci:4EwhsTu7"
+    include "maven.modrinth:5ZwdcRci:4EwhsTu7"
+    modImplementation "maven.modrinth:mOgUt4GM:cLkYaVuL"
+    include "maven.modrinth:mOgUt4GM:cLkYaVuL"
+
+    implementation include("org.json:json:20250517")
+    implementation include("com.squareup.okhttp3:okhttp:5.1.0")
+    implementation include("net.lenni0451:Reflect:1.6.1")
+    compileOnly "org.projectlombok:lombok:1.18.38"
+    annotationProcessor "org.projectlombok:lombok:1.18.38"
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    inputs.property 'archivesName', project.base.archivesName
+
+    from('THIRD_PARTY_NOTICES.txt')
+
+    from('LICENSE') {
+        rename { "${it}_${inputs.properties.archivesName}" }
+    }
+}
+
+tasks.named('remapSourcesJar') {
+    enabled = false
+}
